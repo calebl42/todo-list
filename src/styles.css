@@ -1,0 +1,61 @@
+body {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  text-align: center;
+  background-color: lightcoral;
+}
+
+nav {
+  background-color: lightblue;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  width: 15vw;
+  gap: 20px;
+}
+
+main {
+  height: 100vh;
+  display: flex;
+}
+
+.main-content {
+  padding-left: 30px;
+}
+
+footer {
+  background-color: lightcoral;
+  text-align: center;
+  padding: 10px;
+}
+
+button {
+  padding: 10px;
+  background-color: lightsalmon;
+  border-radius: 20px;
+  border: darkslategrey solid 2px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.todos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.todo {
+  border: 3px solid lightcoral;
+  padding: 0px 15px 0px 15px;
+  border-radius: 20px;
+}
+
