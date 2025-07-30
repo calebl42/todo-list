@@ -7,17 +7,44 @@ export class todo {
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
+    this.id = crypto.randomUUID();
   }
 }
 
-class project {
+export class project {
   constructor(name, todos) {
     this.name = name;
     this.todos = todos;
   }
+
+  addTodo(newTodo) {
+    this.todos.push(newTodo);
+  }
+
+  deleteTodo(id) {
+    this.todos = this.todos.filter((t) => t.id != id);
+  }
 }
 
-export let currentProject = new project("My first project", []);
+let currentIndex = 0;
+
+export function getCurrentIndex() {
+  return currentIndex;
+}
+
+export function setCurrentIndex(index) {
+  currentIndex = index;
+}
+
+//setup first project
+export let projects = [new project("My first project", [])];
+setCurrentIndex(0);
+let firstProjectButton = document.querySelector(".first-project");
+firstProjectButton.addEventListener("click", () => {
+  currentIndex = 0;
+  updateDisplay();
+});
+
 updateDisplay();
 
 
