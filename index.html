@@ -3,9 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Todo List</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Faculty+Glyphic&family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
 <script defer src="main.js"></script></head>
 <body>
-  
+  <header>
+    <h1>Your Todo List</h1>
+  </header>
+  <main>
+    <nav></nav>
+
+    <div class="main-content"></div>
+
+    <dialog>
+      <form method="dialog">
+        <div>
+          <label for="title">Title:</label>
+          <input type="text" id="title" name="title" required>
+        </div>
+        <div id="description-container">
+          <label for="description">Description:</label>
+          <textarea id="description" name="description"></textarea>
+        </div>
+        <div>
+          <label for="due-date">Due Date:</label>
+          <input type="datetime-local" id="due-date" name="due-date">
+        </div>
+        <fieldset>
+          <legend>Priority Level</legend>
+          <div>
+            <input type="radio" id="priority-high" name="drone" value="high">
+            <label for="priority-high">High</label>
+          </div>
+          <div>  
+            <input type="radio" id="priority-medium" name="drone" value="medium" checked>
+            <label for="priority-medium">Medium</label>
+          </div>
+          <div>
+            <input type="radio" id="priority-low" name="drone" value="low">
+            <label for="priority-low">Low</label>
+          </div>
+        </fieldset>
+        <input type="submit" value="OK">
+      </form>
+    </dialog>
+  </main>
+
+  <footer>
+    2025 Caleb Lee
+  </footer>
 </body>
 </html>
