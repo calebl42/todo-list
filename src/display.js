@@ -1,10 +1,10 @@
-import { project, todo, projects, getCurrentIndex, setCurrentIndex, deleteTodo } from "./index.js";
+import { project, todo, projects, getCurrentId, setCurrentId, saveProjects } from "./index.js";
 import { parseISO, format } from "date-fns";
 
 function updateDisplay() {
   let mainContent = document.querySelector(".main-content");
   mainContent.innerHTML = "";
-  let currentProject = projects[getCurrentIndex()];
+  let currentProject = projects[getCurrentId()];
 
   let heading = document.createElement("h2");
   heading.textContent = currentProject.name;
@@ -12,6 +12,34 @@ function updateDisplay() {
   let todosContainer = document.createElement("div");
   todosContainer.classList.add("todos");
 
+  //display projects in nav bar
+  let nav = document.querySelector("nav");
+  nav.innerHTML = "";
+  //setup add project button
+  let addProject = document.createElement("button");
+  addProject.id = "add-project";
+  addProject.textContent = "Add Project";
+  addProject.addEventListener("click", () => {
+    let newProjectName = prompt("Enter new project name: ");
+    if (newProjectName === null) { return; };
+    let newProject = new project(newProjectName, []);
+    projects[newProject.id] = newProject;
+    saveProjects();
+    updateDisplay();
+  });
+  nav.appendChild(addProject)
+  for (const [id, proj] of Object.entries(projects)) {
+    let newProjectButton = document.createElement("button");
+    newProjectButton.textContent = proj.name;
+    newProjectButton.addEventListener("click", () => {
+      setCurrentId(id);
+      updateDisplay();
+    });
+    let addProject = document.querySelector("#add-project");
+    addProject.before(newProjectButton);
+  }
+
+  //display current todos
   for (const todo of currentProject.todos) {
     let currentTodo = document.createElement("div");
     currentTodo.classList.add("todo");
@@ -34,7 +62,7 @@ function updateDisplay() {
     deleteButton.textContent = "finished";
     deleteButton.addEventListener("click", () => {
       currentTodo.remove();
-      projects[getCurrentIndex()].deleteTodo(todo.id);
+      projects[getCurrentId()].deleteTodo(todo.id);
     });
     let showButton = document.createElement("button");
     showButton.textContent = "expand";
@@ -79,32 +107,16 @@ function updateDisplay() {
 let dialog = document.querySelector("dialog");
 let form = document.querySelector("form");
 form.addEventListener("submit", (e) => {
-  let currentProject = projects[getCurrentIndex()];
+  let currentProject = projects[getCurrentId()];
   e.preventDefault();
   const formData = new FormData(form);
   let newTodo = new todo(formData.get("title"), formData.get("description"), formData.get("due-date"), formData.get("drone"));
   currentProject.addTodo(newTodo);
   
+  saveProjects();
   form.reset();
   dialog.close();
   updateDisplay();
-});
-
-//setup add project button
-let addProject = document.querySelector("#add-project");
-addProject.addEventListener("click", () => {
-  let newProjectName = prompt("Enter new project name: ");
-  if (newProjectName === null) { return; };
-  let newProject = new project(newProjectName, []);
-  let newProjectButton = document.createElement("button");
-  newProjectButton.textContent = newProjectName;
-  projects.push(newProject);
-  let index = projects.length - 1;
-  newProjectButton.addEventListener("click", () => {
-    setCurrentIndex(index);
-    updateDisplay();
-  });
-  addProject.before(newProjectButton);
 });
 
 export default updateDisplay;
