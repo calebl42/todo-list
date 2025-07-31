@@ -1,5 +1,6 @@
 import { project, todo, projects, getCurrentId, setCurrentId, saveProjects } from "./index.js";
 import { parseISO, format } from "date-fns";
+import plus from "./plus.png";
 
 function updateDisplay() {
   let mainContent = document.querySelector(".main-content");
@@ -16,9 +17,12 @@ function updateDisplay() {
   let nav = document.querySelector("nav");
   nav.innerHTML = "";
   //setup add project button
-  let addProject = document.createElement("button");
+  let addProject = document.createElement("a");
   addProject.id = "add-project";
-  addProject.textContent = "Add Project";
+  let plusImg = document.createElement("img");
+  plusImg.src = plus;
+  plusImg.width = "30";
+  addProject.appendChild(plusImg);
   addProject.addEventListener("click", () => {
     let newProjectName = prompt("Enter new project name: ");
     if (newProjectName === null) { return; };
@@ -27,6 +31,12 @@ function updateDisplay() {
     saveProjects();
     updateDisplay();
   });
+  addProject.onmouseenter = function() {
+    addProject.style = "background-color: rgba(256, 256, 256, 0.7)";
+  };
+  addProject.onmouseleave = function() {
+    addProject.style = "background-color: transparent";
+  }
   nav.appendChild(addProject)
   for (const [id, proj] of Object.entries(projects)) {
     let newProjectButton = document.createElement("button");
@@ -47,7 +57,7 @@ function updateDisplay() {
     todoTitle.textContent = todo.title;
 
     let todoDescription = document.createElement("p");
-    todoDescription.textContent = todo.description === "" ? "" : "Description: " + todo.description;
+    todoDescription.textContent = "Description: " + todo.description;
     todoDescription.hidden = true;
 
     let todoDueDate = document.createElement("p");
@@ -60,12 +70,15 @@ function updateDisplay() {
 
     let deleteButton = document.createElement("button");
     deleteButton.textContent = "finished";
+    deleteButton.classList.add("finished");
     deleteButton.addEventListener("click", () => {
       currentTodo.remove();
       projects[getCurrentId()].deleteTodo(todo.id);
+      saveProjects();
     });
     let showButton = document.createElement("button");
     showButton.textContent = "expand";
+    showButton.classList.add("show");
     showButton.addEventListener("click", () => {
       if (showButton.textContent === "expand") {
         showButton.textContent = "shrink";
@@ -77,10 +90,19 @@ function updateDisplay() {
       todoPriority.hidden ^= true;
     });
 
-    for (const el of [todoTitle, todoDescription, todoDueDate, todoPriority, deleteButton, showButton]) {
+    currentTodo.appendChild(todoTitle);
+    if (todoDescription.textContent !== "Description: ") currentTodo.appendChild(todoDescription);
+    for (const el of [todoDueDate, todoPriority, deleteButton, showButton]) {
       currentTodo.appendChild(el);
     }
 
+    if (todo.priority === "high") {
+      currentTodo.style.border = "solid red 3px";
+    } else if (todo.priority === "medium") {
+      currentTodo.style.border = "solid orange 3px";
+    } else {
+      currentTodo.style.border = "solid lightblue 3px";
+    }
     todosContainer.appendChild(currentTodo);
   }
 

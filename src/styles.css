@@ -8,6 +8,11 @@ body {
 header {
   text-align: center;
   background-color: lightcoral;
+  font-family: "Fredoka", sans-serif;
+}
+header h1 {
+  font-weight: 600;
+  font-size: 40px;
 }
 
 nav {
@@ -15,36 +20,62 @@ nav {
   display: flex;
   flex-direction: column;
   padding: 30px;
-  width: 15vw;
+  min-width: 250px;
+  max-width: 250px;
   gap: 20px;
+}
+nav > button {
+  font-family: cursive;
 }
 
 main {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
 }
 
 .main-content {
+  font-family: "Fredoka", sans-serif;
   padding-left: 30px;
+  padding-bottom: 30px;
+}
+.main-content h2 {
+  font-weight: 600;
 }
 
 footer {
   background-color: lightcoral;
   text-align: center;
   padding: 10px;
+  font-family: "Fredoka", sans-serif;
 }
 
 button {
   padding: 10px;
   background-color: lightsalmon;
   border-radius: 20px;
-  border: darkslategrey solid 2px;
+  border: solid grey 2px;
+  font-family: "Fredoka", sans-serif;
+  font-size: 15px;
+}
+button:hover {
+  background-color: rgb(249, 122, 72);
 }
 
 form {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  font-family: "Fredoka", sans-serif;
+}
+form input[type=submit] {
+  padding: 5px 10px 5px 10px;
+  background-color: lightsalmon;
+  border-radius: 20px;
+  border: 0;
+  font-family: "Fredoka", sans-serif;
+  font-size: 15px;
+  width: 200px;
+  align-self: center;
 }
 
 .todos {
@@ -54,8 +85,59 @@ form {
 }
 
 .todo {
-  border: 3px solid lightcoral;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 210, 210);
   padding: 0px 15px 0px 15px;
   border-radius: 20px;
+  font-size: 17px;
+}
+.todo h3 {
+  font-weight: 500;
+}
+.todo button {
+  align-self: center;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 10px;
+  width: 100px;
+}
+
+#description-container {
+  display: flex;
+  gap: 5px;
+}
+
+#add-todo {
+  background-color: rgb(189, 241, 241);
+  margin: auto;
+  height: 100px;
+  width: 100px;
+}
+#add-todo:hover {
+  background-color: rgb(140, 219, 219);
+}
+
+#add-project {
+  padding: 5px 0px 0px 0px;
+  margin: 0 auto 0 auto;
+  width: 40px;
+  border-radius: 100px;
+}
+
+.finished {
+  background-color: rgb(145, 232, 145);
+}
+.finished:hover {
+  background-color: rgb(109, 206, 109);
+}
+.show {
+  background-color: rgb(196, 212, 233);
+}
+.show:hover {
+  background-color: rgb(160, 179, 205);
+}
+
+a { 
+  text-align: center;
 }
 
