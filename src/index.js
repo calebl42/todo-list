@@ -63,7 +63,7 @@ export function saveProjects() {
 
 let dropdownButton = document.getElementById("dropdown-button");
 let menu = document.getElementById("menu");
-dropdownButton.classList.add("opened");
+menu.style.visibility = "hidden";
 dropdownButton.onclick = function() {
   dropdownButton.classList.toggle("opened");
   if (menu.style.visibility === "hidden") {
