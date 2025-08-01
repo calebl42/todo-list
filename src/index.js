@@ -61,6 +61,22 @@ export function saveProjects() {
   localStorage.setItem("projects", JSON.stringify(projects));
 }
 
+let dropdownButton = document.getElementById("dropdown-button");
+let menu = document.getElementById("menu");
+dropdownButton.classList.add("opened");
+dropdownButton.onclick = function() {
+  dropdownButton.classList.toggle("opened");
+  if (menu.style.visibility === "hidden") {
+    menu.style.visibility = "visible";
+  } else {
+    menu.style.visibility = "hidden";
+  }
+};
+
+let darkmode = document.getElementById("darkmode");
+darkmode.onclick = function() {
+  let main = document.querySelector("main");
+  main.classList.toggle("dark");
+};
+
 updateDisplay();
-
-
